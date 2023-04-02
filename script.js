@@ -43,7 +43,7 @@ class LinkedList {
     }
 
     at(index) {
-        if (index >= this.sz) {
+        if (!Number.isInteger(index) || index >= this.sz || index < 0) {
             return null;
         }
         let i = 0;
@@ -99,6 +99,9 @@ class LinkedList {
     }
 
     insertAt(value, index) {
+        if (!Number.isInteger(index) || index >= this.sz || index < 0) {
+            return null;
+        }
         const prevNode = this.at(index - 1);
         const nextNode = this.at(index);
         const newNode = new Node(value, nextNode);
@@ -107,6 +110,9 @@ class LinkedList {
     }
 
     removeAt(index) {
+        if (!Number.isInteger(index) || index >= this.sz || index < 0) {
+            return null;
+        }
         this.at(index - 1).nextNode = this.at(index + 1);
         this.sz--;
     }
@@ -117,10 +123,13 @@ list.append(13);
 list.append(14);
 list.append(15);
 list.prepend(12);
-list.prepend(11);
+list.prepend(11); 
+console.log(list.toString()); // 11, 12, 13, 14, 15
 list.pop();
+console.log(list.toString()); // 11, 12, 13, 14
 list.insertAt(20, 3);
+console.log(list.toString()); // 11, 12, 13, 20, 14
 list.removeAt(1);
-console.log(list.size());
-console.log(list.toString());
-console.log(list.at(2));
+console.log(list.size()); // 4
+console.log(list.toString()); // 11, 13, 20, 14
+console.log(list.at(2)); // 20
